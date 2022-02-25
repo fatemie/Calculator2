@@ -15,6 +15,11 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        if(savedInstanceState != null){
+            binding.enterView.text = savedInstanceState.getString("enterView")
+            binding.enterView.text = savedInstanceState.getString("resultView")
+        }
+
         setListener()
 
     }
@@ -145,4 +150,12 @@ class MainActivity : AppCompatActivity() {
         return a / b
     }
     fun  multyply(a: Double, b : Double) = a * b
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState?.run {
+            putString("enterView", binding.enterView.text.toString())
+            putString("resultView", binding.resultView.text.toString())
+        }
+        super.onSaveInstanceState(outState)
+    }
 }
